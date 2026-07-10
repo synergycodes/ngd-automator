@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { initializeModel, NgDiagramComponent, NgDiagramConfig, provideNgDiagram } from 'ng-diagram';
+import { Sidepanel } from "./sidepanel/sidepanel";
 
 @Component({
   selector: 'app-root',
   providers: [provideNgDiagram()],
-  imports: [NgDiagramComponent],
+  imports: [NgDiagramComponent, Sidepanel],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
