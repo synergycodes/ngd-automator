@@ -1,0 +1,9 @@
+<ng-diagram-base-node-template [node]="node()">
+  <div class="flex flex-col gap-1 px-3 py-2">
+    <span class="text-xs font-semibold uppercase text-(--ngd-colors-acc1-500)">Action</span>
+    <span class="text-sm font-medium">{{ node().data.label }}</span>
+    @if (node().data.description) {
+      <span class="text-sm">{{ node().data.description }}</span>
+    }
+  </div>
+</ng-diagram-base-node-template>

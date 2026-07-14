@@ -1,0 +1,56 @@
+@let d = node().data;
+<div class="flex flex-col gap-2">
+  <label class="flex flex-col gap-1">
+    <span class="font-medium">Label</span>
+    <input
+      #label
+      type="text"
+      class="rounded-lg border border-neutral-300 bg-white px-2 py-1 font-mono text-sm focus:border-neutral-500 focus:outline-none"
+      [value]="d.label"
+      (input)="updateLabel(label.value)"
+    />
+  </label>
+  <label class="flex flex-col gap-1">
+    <span class="font-medium">Description</span>
+    <textarea
+      #description
+      rows="3"
+      class="rounded-lg border border-neutral-300 bg-white px-2 py-1 font-mono text-sm focus:border-neutral-500 focus:outline-none"
+      [value]="d.description ?? ''"
+      (input)="updateDescription(description.value)"
+    ></textarea>
+  </label>
+  <div class="flex flex-col gap-1">
+    <span class="font-medium">Options</span>
+    <ul class="flex flex-col gap-1">
+      @for (option of d.options; track option.id) {
+        <li class="flex items-center gap-1">
+          <input
+            #optionLabel
+            type="text"
+            class="min-w-0 flex-1 rounded-lg border border-neutral-300 bg-white px-2 py-1 font-mono text-sm focus:border-neutral-500 focus:outline-none"
+            [value]="option.label"
+            (input)="updateOption(option.id, optionLabel.value)"
+          />
+          <button
+            type="button"
+            aria-label="Remove option"
+            class="flex size-7 shrink-0 items-center justify-center rounded-lg border border-neutral-300 bg-white text-neutral-500 hover:border-red-300 hover:text-red-600"
+            (click)="removeOption(option.id)"
+          >
+            &times;
+          </button>
+        </li>
+      } @empty {
+        <li class="text-neutral-500">No options</li>
+      }
+    </ul>
+    <button
+      type="button"
+      class="self-start rounded-lg border border-neutral-300 bg-white px-2 py-1 text-sm hover:border-neutral-500"
+      (click)="addOption()"
+    >
+      + Add option
+    </button>
+  </div>
+</div>

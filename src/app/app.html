@@ -2,7 +2,9 @@
   <div class="flex flex-col p-4 gap-4">
     <h1 class="font-bold text-2xl text-(--ngd-colors-acc1-500)">NGD-Automator</h1>
     <section class="flex flex-1 rounded-2xl border border-neutral-200 overflow-hidden">
-      <ng-diagram class="flex-1" [model]="model" [config]="config" />
+      <ng-diagram class="flex-1" [model]="model" [config]="config" [nodeTemplateMap]="nodeTemplateMap">
+        <ng-diagram-background />
+      </ng-diagram>
     </section>
   </div>
   <div class="flex flex-col p-4">

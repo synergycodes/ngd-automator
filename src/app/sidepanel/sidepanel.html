@@ -2,17 +2,24 @@
   class="flex flex-col rounded-2xl bg-(--ngd-diagram-background-color) border border-neutral-200 overflow-hidden h-full p-4 gap-4"
 >
   <h2 class="text-xl font-medium">Properties</h2>
-  @if (nodeData(); as data) {
-    <label class="flex flex-col gap-1">
-      <span class="font-medium">Label</span>
-      <input
-        type="text"
-        class="rounded-lg border border-neutral-200 bg-white px-2 py-1 font-mono"
-        [value]="data.label ?? ''"
-        (input)="onLabelChange($any($event.target).value)"
-      />
-    </label>
+
+  @let node = selectedNode();
+  @if (node) {
+    @switch (node.type) {
+      @case ('trigger') {
+        <app-trigger-node-panel [node]="node" />
+      }
+      @case ('action') {
+        <app-action-node-panel [node]="node" />
+      }
+      @case ('decision') {
+        <app-decision-node-panel [node]="node" />
+      }
+      @case ('result') {
+        <app-result-node-panel [node]="node" />
+      }
+    }
   } @else {
-    <p>Nothing selected</p>
+    <p class="text-neutral-500">Nothing selected</p>
   }
 </section>

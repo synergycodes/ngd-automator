@@ -1,0 +1,19 @@
+/* Node chrome lives on the host element (no ng-diagram-base-node-template);
+   the ngd theme variables keep it visually in line with the default nodes.
+   position: relative anchors the node-level left port. */
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 12rem;
+  background-color: var(--ngd-node-bg-primary-default);
+  border: var(--ngd-node-border-size) solid var(--ngd-node-border-color);
+  border-radius: var(--ngd-node-border-radius);
+  color: var(--ngd-txt-primary-default);
+}
+
+/* .ng-diagram-node-selected is applied by NgDiagramNodeSelectedDirective. */
+:host(:hover),
+:host(.ng-diagram-node-selected) {
+  border-color: var(--ngd-node-border-color-hover);
+}

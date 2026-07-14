@@ -1,0 +1,20 @@
+<div class="flex flex-col gap-1 px-3 py-2">
+  <span class="text-xs font-semibold uppercase tracking-wider text-(--ngd-colors-acc1-500)"
+    >Decision</span
+  >
+  <span class="text-sm font-medium">{{ node().data.label }}</span>
+</div>
+
+<ul class="flex flex-col border-t border-neutral-200">
+  @for (option of node().data.options; track option.id) {
+    <!-- relative makes each row the anchor for its own port, so the ports
+         distribute one-per-row down the right edge instead of stacking at center. -->
+    <li class="relative border-neutral-200 px-3 py-1.5 text-[0.8125rem] not-last:border-b">
+      <span>{{ option.label }}</span>
+      <ng-diagram-port [id]="option.id" [type]="'source'" [side]="'right'" />
+    </li>
+  }
+</ul>
+
+<!-- Incoming-connection port, anchored to the host; edges reference it as `port-left`. -->
+<ng-diagram-port id="port-left" type="target" side="left" />

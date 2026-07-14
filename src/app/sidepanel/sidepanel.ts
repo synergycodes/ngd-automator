@@ -1,29 +1,22 @@
 import { Component, computed, inject } from '@angular/core';
-import { NgDiagramModelService, NgDiagramSelectionService } from 'ng-diagram';
-import { NodeData } from '../app.interfaces';
+import { NgDiagramSelectionService } from 'ng-diagram';
+
+import { AppNode } from '../app.interfaces';
+import { TriggerNodePanel } from './panels/trigger-node-panel/trigger-node-panel';
+import { ActionNodePanel } from './panels/action-node-panel/action-node-panel';
+import { DecisionNodePanel } from './panels/decision-node-panel/decision-node-panel';
+import { ResultNodePanel } from './panels/result-node-panel/result-node-panel';
 
 @Component({
   selector: 'app-sidepanel',
-  imports: [],
+  imports: [TriggerNodePanel, ActionNodePanel, DecisionNodePanel, ResultNodePanel],
   templateUrl: './sidepanel.html',
   styleUrl: './sidepanel.css',
 })
 export class Sidepanel {
   private readonly selectionService = inject(NgDiagramSelectionService);
-  private readonly modelService = inject(NgDiagramModelService);
 
-  selectedNode = computed(() => {
-    return this.selectionService.selection().nodes[0];
-  });
-
-  nodeData = computed<NodeData | undefined>(() => this.selectedNode()?.data as NodeData);
-
-  onLabelChange(label: string) {
-    const node = this.selectedNode();
-    if (!node) {
-      return;
-    }
-
-    this.modelService.updateNodeData(node.id, { label });
-  }
+  selectedNode = computed<AppNode | undefined>(
+    () => this.selectionService.selection().nodes[0] as AppNode,
+  );
 }
